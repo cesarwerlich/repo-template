@@ -18,11 +18,14 @@ init/
   TESTING.md
   EVALS.md
   MEMORY.md
+  JOURNAL.md
   ROADMAP.md
   DECISIONS.md
   SECURITY.md
+  SUPPORT.md
   OPERATIONS.md
   CONTRIBUTING.md
+  CODEOWNERS
   RELEASE.md
   .env.example
   .gitignore
@@ -42,6 +45,7 @@ init/
     agents/
     references/
   docs/
+    REFERENCE.md
     agents/
 ```
 
@@ -87,6 +91,7 @@ Validation checks for unresolved placeholders, required payload files, malformed
 ## Design Principles
 
 - Every repo should explain what it is, how to run it, how to change it safely, and what future agents should remember.
+- Every repo benefits from separating durable memory, chronological notes, and compiled reference answers.
 - Every repo should also explain how it is tested and how evaluations or benchmarks are recorded.
 - Every repo should support multiple agent tools by keeping shared guidance in `AGENTS.md` and using thin adapter files for tool-specific entrypoints.
 - Agent skills are optional helpers, not a substitute for reading local project context first.

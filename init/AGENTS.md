@@ -4,7 +4,7 @@ Instructions for AI coding agents working in this repository.
 
 ## Start Every Session
 
-1. Read `CONTEXT.md`, `ROADMAP.md`, and the latest entries in `MEMORY.md`.
+1. Read `CONTEXT.md`, `ROADMAP.md`, `MEMORY.md`, and `JOURNAL.md`.
 2. Inspect the relevant source files before proposing or editing.
 3. Preserve user changes and never revert unrelated work.
 4. Choose the smallest useful change that satisfies the request.
@@ -45,3 +45,5 @@ If checks cannot run, explain why and what remains unverified.
 ## Memory Updates
 
 Update `MEMORY.md` when you learn durable project facts, make a decision that future sessions need, or discover a trap that should not be rediscovered.
+
+Update `JOURNAL.md` when an important discussion, operating observation, or direction change should survive chat history but is not yet a durable fact.

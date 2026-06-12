@@ -18,6 +18,7 @@
 - Include tests or explain why tests do not apply.
 - Call out risk, migration steps, and rollback notes.
 - Update docs when behavior, setup, or operations change.
+- Capture durable knowledge in the right place: `MEMORY.md`, `JOURNAL.md`, or `docs/REFERENCE.md`.
 
 ## Commit Style
 

@@ -20,7 +20,7 @@ Preview without writing:
 
 Profiles:
 
-- `minimal`: core docs, agent guidance, memory, roadmap, testing, evals, security, operations, and basic scripts.
+- `minimal`: core docs, agent guidance, memory, journal, roadmap, testing, evals, security, operations, support, and basic scripts.
 - `github`: minimal plus GitHub issue, PR, CI, and security workflow templates when missing.
 - `full`: every top-level item from `init/`, still no overwrites.
 
@@ -40,6 +40,7 @@ This creates `evals/README.md` only when a repo needs repeatable eval datasets, 
 - `.agents/`: optional bundled skills, specialist personas, and references.
 - `.claude/`: create only when the target repo needs Claude-native agents, commands, settings, or skills.
 - `docs/`: recommended for durable project documentation.
+- `docs/REFERENCE.md`: recommended when important questions and answers would otherwise be lost in chat or issues.
 - `tests/`: create when the repo contains code and has a real test suite.
 - `evals/`: create only for repeatable eval artifacts. Use `EVALS.md` for lightweight strategy notes.
 - `src/`: do not create automatically. Existing repos decide their source layout.
