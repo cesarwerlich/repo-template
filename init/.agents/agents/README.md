@@ -6,7 +6,7 @@ Specialist personas that play a single role with a single perspective. Each pers
 |---------|------|----------|
 | [code-reviewer](code-reviewer.md) | Senior Staff Engineer | Five-axis review before merge |
 | [security-auditor](security-auditor.md) | Security Engineer | Vulnerability detection, OWASP-style audit |
-| [test-engineer](test-engineer.md) | QA Engineer | Test strategy, coverage analysis, Prove-It pattern |
+| [test-engineer](test-engineer.md) | QA Engineer | Test strategy, coverage analysis, Prove-It pattern, eval design |
 
 ## How personas relate to skills and commands
 
@@ -28,6 +28,7 @@ Pick this when you want one perspective on the current change and the user is in
 - "Review this PR" → invoke `code-reviewer` directly
 - "Are there security issues in `auth.ts`?" → invoke `security-auditor` directly
 - "What tests are missing for the checkout flow?" → invoke `test-engineer` directly
+- "How should we score this prompt or workflow across runs?" → invoke `test-engineer` directly
 
 ### Slash command (single persona behind it)
 Pick this when there's a repeatable workflow you'd otherwise re-explain every time.
@@ -102,14 +103,14 @@ Why this fails:
 
 ## Claude Code interop
 
-The personas in this repo are designed to work as Claude Code subagents and as Agent Teams teammates without modification:
+The personas in this repo are designed as portable prompts. To use them as Claude Code subagents, copy the selected persona files into `.claude/agents/` in the target project:
 
-- **As subagents:** auto-discovered when this plugin is enabled (no path config needed). Use the Agent tool with `subagent_type: code-reviewer` (or `security-auditor`, `test-engineer`). `/ship` is the canonical example.
+- **As subagents:** place the file in the target tool's subagent location, then use the tool's normal subagent invocation with `code-reviewer`, `security-auditor`, or `test-engineer`. `/ship` is the canonical example.
 - **As Agent Teams teammates** (experimental, requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`): reference the same persona name when spawning a teammate. The persona's body is **appended to** the teammate's system prompt as additional instructions (not a replacement), so your persona text sits on top of the team-coordination instructions the lead installs (SendMessage, task-list tools, etc.).
 
 Subagents only report results back to the main agent. Agent Teams let teammates message each other directly. Use subagents when reports are enough; use Agent Teams when sub-agents need to challenge each other's findings (e.g. competing-hypothesis debugging). See [references/orchestration-patterns.md](../references/orchestration-patterns.md) for the full mapping.
 
-Plugin agents do not support `hooks`, `mcpServers`, or `permissionMode` frontmatter — those fields are silently ignored. Avoid relying on them when authoring new personas here.
+Shared personas should keep frontmatter portable. Avoid relying on tool-specific fields unless the persona lives in that tool's own folder.
 
 ## Adding a new persona
 

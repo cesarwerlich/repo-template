@@ -1,6 +1,6 @@
-# Claude Instructions
+# Antigravity Instructions
 
-Read `AGENTS.md` first. This file exists for Claude-oriented tools that prefer `CLAUDE.md`.
+Read `AGENTS.md` first. This file is a thin compatibility wrapper for Antigravity or another agent tool.
 
 ## Default Workflow
 
@@ -11,9 +11,15 @@ Read `AGENTS.md` first. This file exists for Claude-oriented tools that prefer `
 5. Run `./scripts/check.sh` when relevant.
 6. Update `MEMORY.md` for durable decisions or traps.
 
+## Tool Boundary
+
+- `AGENTS.md` is the canonical shared contract.
+- `ANTIGRAVITY.md` should stay thin and defer back to shared docs.
+- Do not duplicate policy text here.
+
 ## Boundaries
 
 - Do not overwrite user work.
 - Do not commit secrets.
 - Do not invent missing project facts; record unknowns in `ROADMAP.md` or ask.
-- If this repo is used with another tool, add a similarly thin wrapper rather than duplicating policy text.
+

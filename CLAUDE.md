@@ -1,31 +1,24 @@
 # Claude Instructions
 
-This repo is a universal initializer for new repositories and work folders.
+Read `README.md` and `AGENTS.md` first. This file exists for Claude-oriented tools working on the template repository itself.
 
-## Operating Model
+## Default Workflow
 
-- `init/` is the payload copied into new projects.
-- Root-level `skills/`, `agents/`, `references/`, and `docs/` are maintained here as source material.
-- New repos receive the bundled agent subsystem under `init/.agents/`.
+1. Ground in `CONTEXT.md` and inspect `init/` before changing generated-project behavior.
+2. Keep root docs about maintaining this template.
+3. Keep `init/` payload files generic, stack-neutral, and safe by default.
+4. Use relevant `skills/` workflows only after understanding local context.
+5. Run `./scripts/validate-template.sh` before finishing.
+6. When changing generated-project scripts, dry-run a temporary generated repo and run its `./scripts/check.sh` when relevant.
 
-## Working Rules
+## Tool Boundary
 
-- Read `README.md` and `AGENTS.md` before making template changes.
-- Read the relevant files under `init/` before changing new-project behavior.
-- Use agent skills only after understanding local context.
-- Keep new-project files generic, stack-aware, and safe by default.
-- Do not overwrite user files in scripts unless an explicit force mode is added and documented.
+- `AGENTS.md` is the canonical shared contract.
+- `CLAUDE.md` should stay thin and defer back to shared docs.
+- If this repo is used with another tool, add a similarly thin wrapper rather than duplicating policy text.
 
-## Verification
+## Boundaries
 
-Before finishing:
-
-```bash
-./scripts/validate-template.sh
-```
-
-When changing generated-project scripts, also dry-run a new repo in a temporary folder and run:
-
-```bash
-./scripts/check.sh
-```
+- Do not overwrite user work.
+- Do not commit secrets.
+- Do not invent missing project facts; record unknowns in `JOURNAL.md` or ask.

@@ -120,7 +120,9 @@ This catalog is harness-agnostic, but most readers will run it on Claude Code. H
 
 ### Where personas live
 
-Plugin subagents go in `agents/` at the plugin root. This repo is a plugin (`.claude-plugin/plugin.json`), so `agents/code-reviewer.md`, `agents/security-auditor.md`, and `agents/test-engineer.md` are auto-discovered when the plugin is enabled. No path configuration needed.
+In this template, `agents/` contains reusable persona source material and generated repos receive copies under `.agents/agents/`. Treat those files as portable prompts unless a specific harness imports them.
+
+For Claude Code project subagents, copy selected personas into `.claude/agents/` in the target project. For shared, tool-neutral playbooks, use `docs/agents/`. Do not assume root `agents/` files are auto-discovered unless the target tool explicitly supports that path.
 
 ### Subagents vs. Agent Teams
 
@@ -134,7 +136,7 @@ Claude Code has two parallelism primitives. Pattern 3 (parallel fan-out with mer
 | Status | Stable | Experimental — requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` |
 | Cost | Lower | Higher — each teammate is a separate Claude instance |
 
-**The personas in this repo work in both modes.** When spawned as subagents (e.g. by `/ship`), they report findings to the main session. When spawned as teammates (`Spawn a teammate using the security-auditor agent type…`), they can challenge each other's findings directly. The persona definition is the same; only the spawning context changes.
+**The personas in this repo are designed to be portable across modes.** When copied into a subagent-compatible location and spawned as subagents (e.g. by `/ship`), they report findings to the main session. When used as teammates (`Spawn a teammate using the security-auditor agent type...`), they can challenge each other's findings directly. The persona definition is the same; only the spawning context changes.
 
 One subtlety: the `skills` and `mcpServers` frontmatter fields in a persona are honored when it runs as a subagent but **ignored when it runs as a teammate** — teammates load skills and MCP servers from your project and user settings, the same as a regular session. If a persona depends on a specific skill or MCP server being loaded, configure it at the session level so it's available in both modes.
 
@@ -159,11 +161,11 @@ Before defining a custom subagent, check whether one of these covers the role:
 
 Don't redefine these. Layer your specialist personas (code-reviewer, security-auditor, test-engineer) on top of them.
 
-### Frontmatter restrictions for plugin agents
+### Frontmatter restrictions
 
-Plugin subagents do **not** support the `hooks`, `mcpServers`, or `permissionMode` frontmatter fields — these are silently ignored. If a future persona needs any of those, the user must copy the file into `.claude/agents/` or `~/.claude/agents/` instead.
+Some harnesses ignore fields such as `hooks`, `mcpServers`, or `permissionMode`. If a future persona depends on tool-specific frontmatter, keep that persona in the tool-specific location such as `.claude/agents/` rather than in shared `docs/agents/`.
 
-The fields that DO work in plugin agents are: `name`, `description`, `tools`, `disallowedTools`, `model`, `maxTurns`, `skills`, `memory`, `background`, `effort`, `isolation`, `color`, `initialPrompt`. Use `model` per-persona if you want to optimize cost (e.g. Haiku for `test-engineer` coverage scans, Sonnet for `code-reviewer`, Opus for `security-auditor`).
+Keep shared persona frontmatter minimal: `name` and `description` are the safest portable fields.
 
 ### Spawning multiple subagents in parallel
 

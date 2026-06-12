@@ -12,6 +12,7 @@ Developers starting new projects, and AI coding agents working inside generated 
 
 - `init/` — the payload copied into new projects (docs, scripts, CI, `.agents/`).
 - `skills/`, `agents/`, `references/` — source material for the agent subsystem. Copied verbatim into `init/.agents/` when maintained.
+- `docs/agents/` — shared tool-neutral personas and playbooks in generated repos.
 - `docs/adr/` — architectural decisions about the template itself.
 - `scripts/` — validation and maintenance tooling.
 
@@ -21,11 +22,14 @@ The template is a file tree, not a runtime system. It has no build step, no depe
 
 New repos receive the `init/` payload. The agent subsystem (`init/.agents/`) is optional — projects that don't use AI agents can delete it.
 
+For multi-tool repos, `AGENTS.md` is the canonical instruction file, while `CLAUDE.md` and `ANTIGRAVITY.md` are thin compatibility wrappers that point back to the shared context.
+
 ## Local Commands
 
 ```bash
 ./scripts/validate-template.sh   # verify template integrity
 ./init/scripts/new-repo.sh /path/to/new-project "Project Name"   # create a new repo
+./scripts/adopt-existing-repo.sh /path/to/existing-project   # add missing best-practice files safely
 ```
 
 ## Constraints

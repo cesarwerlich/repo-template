@@ -20,6 +20,7 @@ This repository maintains a universal repo initializer. The copyable project pay
 - Do not add project-specific names, URLs, secrets, or hardcoded package-manager assumptions to the payload.
 - Prefer small shell scripts with clear output over a generator framework.
 - When adding a new required payload file, update `scripts/validate-template.sh`.
+- Treat `AGENTS.md` as canonical for shared instructions. Tool-specific wrappers like `CLAUDE.md` and `ANTIGRAVITY.md` should stay thin and defer back here.
 
 ## Agent Skills
 
@@ -30,6 +31,7 @@ Skills are workflows, not mandatory blockers. Use them when they match the work:
 - Security, secrets, auth, or dependency policy: `security-and-hardening`.
 - CI or automation: `ci-cd-and-automation`.
 - Documentation structure or ADRs: `documentation-and-adrs`.
+- Existing repo adoption flow: keep it additive and no-overwrite by default.
 
 If a skill conflicts with local project instructions, local project instructions win.
 

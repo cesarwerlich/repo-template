@@ -15,6 +15,9 @@ required_files=(
   "init/CONTEXT.md"
   "init/AGENTS.md"
   "init/CLAUDE.md"
+  "init/ANTIGRAVITY.md"
+  "init/TESTING.md"
+  "init/EVALS.md"
   "init/MEMORY.md"
   "init/ROADMAP.md"
   "init/SECURITY.md"
@@ -22,7 +25,10 @@ required_files=(
   "init/CONTRIBUTING.md"
   "init/.gitignore"
   "init/.env.example"
+  "init/docs/agents/README.md"
+  "init/docs/template-adoption/README.md"
   "init/scripts/check.sh"
+  "scripts/adopt-existing-repo.sh"
 )
 
 for path in "${required_files[@]}"; do

@@ -2,6 +2,8 @@
 
 Reusable starter files for new repositories and work folders. The template is intentionally stack-neutral: it gives each project a clear operating model, agent instructions, memory, security/ops docs, and lightweight scripts without assuming Node, Python, Go, Rust, or any single deployment target.
 
+It is also tool-neutral: `AGENTS.md` is the canonical shared contract, while `CLAUDE.md` and `ANTIGRAVITY.md` are thin compatibility wrappers that point back to the shared docs.
+
 ## What Gets Copied
 
 The `init/` directory is the payload for new projects:
@@ -12,6 +14,9 @@ init/
   CONTEXT.md
   AGENTS.md
   CLAUDE.md
+  ANTIGRAVITY.md
+  TESTING.md
+  EVALS.md
   MEMORY.md
   ROADMAP.md
   DECISIONS.md
@@ -36,9 +41,11 @@ init/
     skills/
     agents/
     references/
+  docs/
+    agents/
 ```
 
-The root `skills/`, `agents/`, `references/`, and `docs/` folders are source material for maintaining the bundled agent subsystem. New repos receive a copy under `init/.agents/`.
+The root `skills/`, `agents/`, `references/`, and `docs/` folders are source material for maintaining the bundled agent subsystem. New repos receive a copy under `init/.agents/`, plus a shared `docs/agents/` home for tool-neutral personas and playbooks.
 
 ## Use It
 
@@ -57,6 +64,16 @@ Then in the new project:
 
 If the target folder already exists, `new-repo.sh` copies only missing files and leaves existing files untouched.
 
+For existing repositories where you want an adoption report and a smaller default payload:
+
+```bash
+./scripts/adopt-existing-repo.sh /path/to/existing-project
+```
+
+Use `--report-only` to inspect what would be created without writing files.
+
+See `docs/adopting-existing-repos.md` for profiles and conflict-safe adoption guidance.
+
 ## Maintain It
 
 Run validation after edits:
@@ -70,6 +87,8 @@ Validation checks for unresolved placeholders, required payload files, malformed
 ## Design Principles
 
 - Every repo should explain what it is, how to run it, how to change it safely, and what future agents should remember.
+- Every repo should also explain how it is tested and how evaluations or benchmarks are recorded.
+- Every repo should support multiple agent tools by keeping shared guidance in `AGENTS.md` and using thin adapter files for tool-specific entrypoints.
 - Agent skills are optional helpers, not a substitute for reading local project context first.
 - Security, rollback, ownership, and checks belong in the first commit, not after production hurts.
 - The template should stay lightweight enough to use for a scratch folder and strong enough to grow into a production service.
