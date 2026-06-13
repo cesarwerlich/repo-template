@@ -45,4 +45,4 @@ See [agents/README.md](agents/README.md) for persona details.
 
 ## Copy Behavior
 
-The source folders at the repository root are copied into `init/.agents/` when the template is maintained. New repos should treat `.agents/` as optional local guidance and may delete it if they do not use AI coding agents.
+The source folders at the repository root (`skills/`, `agents/`, `references/`) are the single source of truth. They are **not** committed under `init/`. Instead, `init/scripts/new-repo.sh` generates them into each new repo's `.agents/` at creation time (the `adopt-existing-repo.sh` `full` profile does the same), so there is no stored duplicate to drift. New repos should treat `.agents/` as optional local guidance and may delete it if they do not use AI coding agents.

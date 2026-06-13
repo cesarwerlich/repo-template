@@ -32,17 +32,42 @@ Optional:
 
 This creates `evals/README.md` only when a repo needs repeatable eval datasets, fixtures, run logs, or benchmark artifacts.
 
+## What Gets Created
+
+The minimal profile creates these files (never overwrites existing ones):
+
+| File | Purpose |
+| --- | --- |
+| `CONTEXT.md` | Purpose, architecture, constraints — fill in after adoption |
+| `TASKS.md` | Live handoff: current work, active sessions, next action |
+| `DECISIONS.md` | Accepted decisions still in force |
+| `AGENTS.md` | Canonical agent contract (session start, coordination, safety) |
+| `CLAUDE.md` | Thin pointer → `AGENTS.md` |
+| `ANTIGRAVITY.md` | Thin pointer → `AGENTS.md` |
+| `docs/roadmap.md` | Priorities and open questions |
+| `docs/memory.md` | Durable facts, traps, compiled Q&A |
+| `docs/journal.md` | Chronological notes and discussion outcomes |
+| `docs/testing.md` | Testing strategy |
+| `docs/evals.md` | Evaluation or benchmark notes |
+| `docs/operations.md` | Deploy, rollback, observability |
+| `SECURITY.md` | Security policy |
+| `SUPPORT.md` | Support channels |
+| `scripts/bootstrap.sh` | Install/setup automation |
+| `scripts/check.sh` | Stack-aware verification |
+
+The `full` profile also generates `.agents/` (skills, personas, references) from the template's root source.
+
 ## Folder Guidance
 
 - `AGENTS.md`: canonical shared instructions for Codex, Claude, Antigravity, Copilot, and other coding agents.
 - `CLAUDE.md`, `ANTIGRAVITY.md`: thin compatibility wrappers that point back to `AGENTS.md`.
 - `docs/agents/`: tool-neutral playbooks, rubrics, and personas.
-- `.agents/`: optional bundled skills, specialist personas, and references.
+- `.agents/`: optional bundled skills, specialist personas, and references — generated, not committed.
 - `.claude/`: create only when the target repo needs Claude-native agents, commands, settings, or skills.
 - `docs/`: recommended for durable project documentation.
-- `docs/REFERENCE.md`: recommended when important questions and answers would otherwise be lost in chat or issues.
+- `docs/memory.md`: durable facts and compiled Q&A that would otherwise be lost in chat.
 - `tests/`: create when the repo contains code and has a real test suite.
-- `evals/`: create only for repeatable eval artifacts. Use `EVALS.md` for lightweight strategy notes.
+- `evals/`: create only for repeatable eval artifacts (datasets, fixtures, run logs).
 - `src/`: do not create automatically. Existing repos decide their source layout.
 
 ## Manual Merge Policy

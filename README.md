@@ -11,49 +11,35 @@ The `init/` directory is the payload for new projects:
 ```text
 init/
   README.md
-  CONTEXT.md
-  AGENTS.md
-  CLAUDE.md
-  ANTIGRAVITY.md
-  TESTING.md
-  EVALS.md
-  MEMORY.md
-  JOURNAL.md
-  ROADMAP.md
-  DECISIONS.md
-  SECURITY.md
-  SUPPORT.md
-  OPERATIONS.md
-  CONTRIBUTING.md
-  CODEOWNERS
-  RELEASE.md
-  .env.example
-  .gitignore
-  .editorconfig
+  CONTEXT.md       Purpose, architecture, constraints     ┐ startup
+  TASKS.md         Live handoff: active work, next action  ├ reads
+  DECISIONS.md     Accepted decisions still in force       ┘
+  AGENTS.md        Canonical agent contract
+  CLAUDE.md        Thin wrapper -> AGENTS.md
+  ANTIGRAVITY.md   Thin wrapper -> AGENTS.md
+  SECURITY.md  SUPPORT.md  CONTRIBUTING.md  CODEOWNERS   (kept at root for GitHub)
+  .env.example  .gitignore  .editorconfig
   scripts/
     bootstrap.sh
     check.sh
     new-repo.sh
   .github/
-    workflows/
-      ci.yml
-      security.yml
+    workflows/{ci.yml, security.yml}
     pull_request_template.md
     ISSUE_TEMPLATE/
   .agents/
-    skills/
-    agents/
-    references/
+    README.md         (skills/, agents/, references/ generated at create time)
   docs/
-    REFERENCE.md
-    agents/
+    roadmap.md  memory.md  journal.md
+    testing.md  evals.md  operations.md  release.md
+    adr/  history/  specs/  agents/  runbooks/  template-adoption/
 ```
 
-The root `skills/`, `agents/`, `references/`, and `docs/` folders are source material for maintaining the bundled agent subsystem. New repos receive a copy under `init/.agents/`, plus a shared `docs/agents/` home for tool-neutral personas and playbooks.
+The root `skills/`, `agents/`, and `references/` folders are the single source for the bundled agent subsystem. They are **not** committed under `init/`; instead `new-repo.sh` generates them into each new repo's `.agents/` at creation time, so there is no stored duplicate to drift. `docs/agents/` ships as a shared home for tool-neutral personas and playbooks.
 
 ## Use It
 
-From this template directory:
+### New repository
 
 ```bash
 ./init/scripts/new-repo.sh /path/to/new-project "Project Name"
@@ -68,15 +54,21 @@ Then in the new project:
 
 If the target folder already exists, `new-repo.sh` copies only missing files and leaves existing files untouched.
 
-For existing repositories where you want an adoption report and a smaller default payload:
+### Existing repository
+
+Already have a repo and want to add the template's docs, agent guidance, and scripts without touching what's there?
 
 ```bash
-./scripts/adopt-existing-repo.sh /path/to/existing-project
+# Preview what would be created — writes nothing
+./scripts/adopt-existing-repo.sh --report-only /path/to/existing-repo
+
+# Apply (additive only, never overwrites existing files)
+./scripts/adopt-existing-repo.sh /path/to/existing-repo
 ```
 
-Use `--report-only` to inspect what would be created without writing files.
+Profiles: `minimal` (default, core docs + agent files), `github` (adds CI/PR templates), `full` (everything including `.agents/`).
 
-See `docs/adopting-existing-repos.md` for profiles and conflict-safe adoption guidance.
+See `docs/adopting-existing-repos.md` for what gets created, folder guidance, and conflict-safe adoption details.
 
 ## Maintain It
 

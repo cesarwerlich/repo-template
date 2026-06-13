@@ -6,10 +6,10 @@ Before asking for help, check:
 
 - `README.md`
 - `CONTEXT.md`
-- `ROADMAP.md`
-- `MEMORY.md`
-- `TESTING.md`
-- `EVALS.md`
+- `docs/roadmap.md`
+- `docs/memory.md`
+- `docs/testing.md`
+- `docs/evals.md`
 
 ## How To Ask For Help
 

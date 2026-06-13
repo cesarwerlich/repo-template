@@ -17,17 +17,20 @@ cp .env.example .env
 
 ## Project Context
 
-Read these first:
+Read these first (kept small on purpose):
 
 - `CONTEXT.md` - purpose, architecture, constraints, and local commands.
-- `ROADMAP.md` - current priorities and known open questions.
-- `MEMORY.md` - durable project facts and repeated decisions.
-- `JOURNAL.md` - chronological notes and discussion outcomes.
-- `AGENTS.md` - instructions for AI coding agents.
-- `CLAUDE.md` and `ANTIGRAVITY.md` - thin tool-specific wrappers that point back to `AGENTS.md`.
-- `TESTING.md` - how this repo is tested and verified.
-- `EVALS.md` - how quality checks, benchmarks, or evaluations are recorded.
-- `docs/REFERENCE.md` - compiled questions, answers, and notable decisions for fast lookup.
+- `TASKS.md` - current objective, active work, and handoff between sessions.
+- `DECISIONS.md` - accepted decisions still in force.
+- `AGENTS.md` - the canonical contract for AI coding agents.
+
+Read on demand:
+
+- `docs/roadmap.md` - priorities and open questions.
+- `docs/memory.md` - durable facts, traps, and compiled Q&A.
+- `docs/journal.md` - chronological notes and discussion outcomes.
+- `docs/testing.md` / `docs/evals.md` - verification and benchmark notes.
+- `CLAUDE.md` and `ANTIGRAVITY.md` - thin tool wrappers that point back to `AGENTS.md`.
 
 ## Common Commands
 
@@ -40,15 +43,24 @@ Read these first:
 
 ```text
 .
-  docs/           Project docs, ADRs, and runbooks
-  docs/REFERENCE.md Compiled Q&A and discussion outcomes
-  docs/agents/    Shared personas and playbooks for any agent tool
+  CONTEXT.md      Purpose, architecture, constraints
+  TASKS.md        Live handoff: current objective, active work, next action
+  DECISIONS.md    Accepted decisions still in force
+  AGENTS.md       Canonical contract for AI coding agents
   scripts/        Bootstrap, checks, and project automation
   .agents/        Optional agent skills, personas, and references
-  TESTING.md      Testing strategy and verification notes
-  EVALS.md        Evaluation or benchmark notes, when relevant
-  MEMORY.md       Durable project facts and repeated decisions
-  JOURNAL.md      Chronological working log
+  docs/           Project docs and knowledge base
+    roadmap.md      Priorities and open questions
+    memory.md       Durable facts, traps, and compiled Q&A
+    journal.md      Chronological working log
+    testing.md      Testing strategy and verification notes
+    evals.md        Evaluation or benchmark notes, when relevant
+    operations.md   Deploy, rollback, observability
+    release.md      Release and rollback checklists
+    adr/            Architectural decision records
+    history/        Archived journal entries
+    specs/          Feature specs, when relevant
+    agents/         Shared personas and playbooks for any agent tool
 ```
 
 Update this section as the project takes shape.

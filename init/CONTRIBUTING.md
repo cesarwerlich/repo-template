@@ -18,7 +18,7 @@
 - Include tests or explain why tests do not apply.
 - Call out risk, migration steps, and rollback notes.
 - Update docs when behavior, setup, or operations change.
-- Capture durable knowledge in the right place: `MEMORY.md`, `JOURNAL.md`, or `docs/REFERENCE.md`.
+- Capture knowledge in the right place: durable facts in `docs/memory.md`, chronology in `docs/journal.md`, accepted decisions in `DECISIONS.md`, and in-flight handoff in `TASKS.md`.
 
 ## Commit Style
 
