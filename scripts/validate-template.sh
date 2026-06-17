@@ -24,6 +24,7 @@ required_files=(
   "init/CODEOWNERS"
   "init/.gitignore"
   "init/.env.example"
+  "init/CLAUDE.local.md.example"
   "init/.agents/README.md"
   "init/docs/roadmap.md"
   "init/docs/memory.md"

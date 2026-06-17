@@ -20,6 +20,7 @@ init/
   PLAYBOOK.md      Why each area exists and how to use it
   SECURITY.md  SUPPORT.md  CONTRIBUTING.md  CODEOWNERS   (kept at root for GitHub)
   .env.example  .gitignore  .editorconfig
+  CLAUDE.local.md.example   Copy → CLAUDE.local.md (gitignored) for machine-specific config
   scripts/
     bootstrap.sh
     check.sh

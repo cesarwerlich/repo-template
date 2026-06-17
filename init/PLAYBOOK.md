@@ -122,17 +122,30 @@ This file explains why each area of this repo exists, what it's for, and how to 
 
 ## 10. Project vs Global Configuration
 
-- **What it is:** A clear separation between what the whole team shares (committed to the repo) and what each person or agent configures for themselves (personal global settings).
-- **Goal:** Team members and agents follow the same project contract without being forced into identical personal workflows.
-- **Files (project level — committed, shared):**
-  - `AGENTS.md` — team-shared agent contract.
-  - `.claude/agents/<project-role>.md` — project-specific personas.
-  - `.claude/commands/` — project-specific slash commands.
-  - `.claude/settings.json` — allowed tools scoped to this repo's scripts; project-level hooks.
-- **Personal (never committed — lives in `~/.claude/`):**
-  - `~/.claude/CLAUDE.md` — personal coding style, language preferences, communication rules.
-  - `~/.claude/agents/<generic>.md` — reusable generic personas (code-reviewer, planner, etc.) available across all projects.
-  - `~/.claude/rules/` — cross-project standards (test coverage, security requirements, formatting).
-  - `~/.claude/settings.json` — personal defaults (model, theme, personal tool permissions).
-- **How to use it:** When you add agent guidance, ask: "does this apply to everyone on this project, or just to me?" Project-wide → commit it. Personal → put it in `~/.claude/`.
-- **Why it matters:** Conflating project rules with personal preferences causes friction — either the project enforces too much (blocking personal tooling) or too little (agents behave inconsistently across team members).
+- **What it is:** The official four-level scope hierarchy for Claude configuration — from org-wide policies down to machine-local personal overrides.
+- **Goal:** Team members and agents follow the same project contract without being forced into identical personal workflows. Safety-critical rules are enforced by hooks, not just by text in CLAUDE.md.
+- **The four levels (highest to lowest precedence):**
+  1. **Enterprise** — `/Library/Application Support/ClaudeCode/CLAUDE.md` — org-wide policies. Rarely used outside managed environments.
+  2. **Project** — `AGENTS.md`, `CLAUDE.md`, `.claude/settings.json`, `.claude/agents/`, `.claude/commands/` — committed, shared with the whole team.
+  3. **User global** — `~/.claude/CLAUDE.md`, `~/.claude/settings.json`, `~/.claude/agents/` — personal defaults across all projects. Never committed.
+  4. **Machine-local** — `CLAUDE.local.md`, `.claude/settings.local.json` — gitignored, machine-specific overrides for this project. Copy `CLAUDE.local.md.example` to get started.
+- **What belongs at each level:**
+
+  | Artifact | Level | Why |
+  |---|---|---|
+  | `AGENTS.md` | Project | Team-shared contract — architecture, rules, coordination |
+  | `.claude/agents/<project-role>.md` | Project | Project-specific personas (tech lead, domain experts) |
+  | `.claude/commands/` | Project | Project-specific slash commands |
+  | `.claude/settings.json` | Project | Allowed tools, project hooks (lint, build scripts) |
+  | `~/.claude/CLAUDE.md` | Global | Personal coding style, communication preferences |
+  | `~/.claude/agents/<generic>.md` | Global | Reusable personas across projects (code-reviewer, planner) |
+  | `~/.claude/rules/` | Global | Cross-project standards, Karpathy guidelines, security checklist |
+  | `~/.claude/settings.json` | Global | Personal model, theme, personal tool permissions |
+  | `CLAUDE.local.md` | Local | Machine ports, personal shorthand, local paths (gitignored) |
+  | `.claude/settings.local.json` | Local | Per-machine tool overrides (gitignored) |
+
+- **Hooks vs CLAUDE.md:** CLAUDE.md rules are *suggestions* — Claude can override them under context pressure. Hooks are *deterministic enforcement* — they always execute regardless of context. Put safety-critical rules (no secrets, format on save) in `.claude/settings.json` hooks, not just in CLAUDE.md text.
+- **`@import` for deduplication:** Use `@~/.claude/rules/security.md` in project CLAUDE.md instead of copying the security checklist into every project. Keeps projects thin; keeps the rule in one place.
+- **Keep project CLAUDE.md under ~200 lines** — above that, adherence degrades. Move large rule sets to `.claude/rules/<topic>.md` with `paths:` frontmatter for path-scoped lazy loading.
+- **How to use it:** When you add agent guidance, ask: "does this apply to everyone on this project, or just to me?" Project-wide → commit it. Personal → put it in `~/.claude/`. Machine-specific → put it in `CLAUDE.local.md`.
+- **Why it matters:** Conflating project rules with personal preferences causes friction and drift. The @import pattern, path-scoped rules, and hooks let each layer stay focused on its actual job.
