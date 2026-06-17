@@ -74,13 +74,36 @@ See `docs/adopting-existing-repos.md` for what gets created, folder guidance, an
 
 ## Maintain It
 
-Run validation after edits:
+1. Read `CONTEXT.md` — template's own architecture and constraints.
+2. Edit `init/` for payload changes; edit root `skills/`, `agents/`, `references/` for the agent subsystem.
+3. When adding a required payload file, update `scripts/validate-template.sh`.
+4. Run validation before finishing:
 
 ```bash
 ./scripts/validate-template.sh
 ```
 
 Validation checks for unresolved placeholders, required payload files, malformed skill frontmatter, broken local markdown links, and ignored OS/secret files.
+
+5. Dry-run a new repo to confirm the full tree generates correctly:
+
+```bash
+./init/scripts/new-repo.sh /tmp/test-project "Test" && cd /tmp/test-project && ./scripts/check.sh
+```
+
+## Navigation
+
+| File / Folder | Purpose |
+|---|---|
+| `README.md` | Usage, design principles, full file list (you are here) |
+| `CONTEXT.md` | Template architecture, constraints, local commands |
+| `AGENTS.md` | Agent guidance, skill groups, safety rules |
+| `CONTRIBUTING.md` | Change guidelines and review checklist |
+| `PLAYBOOK.md` | Design intent for each template lane |
+| `docs/adr/` | Architectural decision records |
+| `docs/adopting-existing-repos.md` | Adoption profiles and conflict-safe guidance |
+| `init/` | The payload — what new projects receive |
+| `skills/` | Source for bundled agent skills (generated into `.agents/` at create time) |
 
 ## Design Principles
 

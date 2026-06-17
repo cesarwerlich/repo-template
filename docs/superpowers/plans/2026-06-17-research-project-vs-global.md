@@ -82,9 +82,9 @@ Hermes's opener: "Never give up on the right solution." This sets the tone for t
 
 ---
 
-## Agent B Findings (pending — .claude/ directory patterns)
+## Agent B Findings — .claude/ directory patterns
 
-*To be added when Agent B completes.*
+*Agent hit a session rate limit and returned no results. Agent C's findings cover the .claude/ settings hierarchy sufficiently (see official 4-level scope section above).*
 
 ---
 

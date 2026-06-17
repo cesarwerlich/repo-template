@@ -1,5 +1,22 @@
 # Evals
 
+## When to Use This File
+
+Use `docs/evals.md` when your project has **repeatable, measurable quality checks** that go beyond pass/fail unit tests:
+
+- LLM output quality (accuracy, tone, refusal rate, latency per prompt)
+- Model comparison (version A vs B on a fixed dataset)
+- Regression benchmarks (does this change make the model worse?)
+- Human-in-the-loop scoring pipelines
+- Dataset-driven fixtures stored in `evals/`
+- Agent behavior acceptance checks across multiple runs
+
+Use `docs/testing.md` for everything else — unit tests, integration tests, E2E, coverage targets, CI setup.
+
+If you're not sure, start with `docs/testing.md`. Promote to evals only when you need reproducible benchmark datasets, score tracking over time, or multi-run comparison.
+
+---
+
 This file is for evaluation criteria, benchmark notes, and repeatable quality checks.
 
 ## What Counts As An Eval
