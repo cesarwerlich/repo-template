@@ -1,0 +1,36 @@
+# Local Claude Config (machine-specific — copy to CLAUDE.local.md)
+#
+# CLAUDE.local.md is gitignored. It overrides CLAUDE.md for your machine only.
+# Never commit it. Never put secrets in it.
+#
+# Usage:
+#   cp CLAUDE.local.md.example CLAUDE.local.md
+#   Edit CLAUDE.local.md for your machine.
+
+## Local Dev Environment
+
+<!-- What's already running locally so Claude doesn't try to start it:
+Dev server is already running on port 3000.
+Database is running at localhost:5432.
+-->
+
+## Personal Shorthand
+
+<!-- Commands I use that Claude should recognize:
+When I say "ship it" I mean: lint, build, verify tests pass, then open a PR.
+When I say "clean up" I mean: remove debug logs and dead code only, no refactoring.
+-->
+
+## Local Paths
+
+<!-- Machine-specific locations:
+Write scratch/exploration files to ~/Desktop/scratch/ — not inside the repo.
+-->
+
+## Personal Rules
+
+<!-- Override or extend CLAUDE.md rules for your workflow only.
+Examples:
+- I prefer longer, more verbose explanations in responses.
+- I'm working on the frontend module this sprint — focus suggestions there.
+-->

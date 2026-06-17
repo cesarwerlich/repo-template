@@ -16,22 +16,30 @@ required_files=(
   "init/AGENTS.md"
   "init/CLAUDE.md"
   "init/ANTIGRAVITY.md"
-  "init/TESTING.md"
-  "init/EVALS.md"
-  "init/MEMORY.md"
-  "init/JOURNAL.md"
-  "init/ROADMAP.md"
+  "init/TASKS.md"
+  "init/DECISIONS.md"
   "init/SECURITY.md"
   "init/SUPPORT.md"
-  "init/OPERATIONS.md"
   "init/CONTRIBUTING.md"
   "init/CODEOWNERS"
   "init/.gitignore"
   "init/.env.example"
-  "init/docs/REFERENCE.md"
+  "init/CLAUDE.local.md.example"
+  "init/.agents/README.md"
+  "init/docs/roadmap.md"
+  "init/docs/memory.md"
+  "init/docs/journal.md"
+  "init/docs/testing.md"
+  "init/docs/evals.md"
+  "init/docs/operations.md"
+  "init/docs/release.md"
   "init/docs/agents/README.md"
+  "init/docs/history/README.md"
+  "init/docs/specs/README.md"
   "init/docs/template-adoption/README.md"
   "init/scripts/check.sh"
+  "init/scripts/new-repo.sh"
+  "init/PLAYBOOK.md"
   "scripts/adopt-existing-repo.sh"
 )
 
@@ -64,7 +72,7 @@ while IFS= read -r skill_file; do
   if ! awk 'BEGIN{front=0; name=0; desc=0} NR==1 && $0=="---"{front=1; next} front && /^name: /{name=1} front && /^description: /{desc=1} front && $0=="---"{exit !(name && desc)} END{if (!front) exit 1}' "$skill_file"; then
     fail "malformed skill frontmatter: $skill_file"
   fi
-done < <(find skills init/.agents/skills -name SKILL.md -type f 2>/dev/null | sort)
+done < <(find skills -name SKILL.md -type f 2>/dev/null | sort)
 
 while IFS= read -r md_file; do
   dir="$(dirname "$md_file")"

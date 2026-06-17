@@ -35,6 +35,25 @@ Skills are workflows, not mandatory blockers. Use them when they match the work:
 
 If a skill conflicts with local project instructions, local project instructions win.
 
+### Skill Groups
+
+Skills ship in `skills/` and are generated into `.agents/skills/` at repo creation time.
+
+- Define and plan: `idea-refine`, `spec-driven-development`, `planning-and-task-breakdown`
+- Build: `incremental-implementation`, `test-driven-development`, `context-engineering`, `source-driven-development`
+- Interfaces and UI: `api-and-interface-design`, `frontend-ui-engineering`, `browser-testing-with-devtools`
+- Discovery: `web-app-capability-audit`
+- Verify and recover: `debugging-and-error-recovery`, `code-review-and-quality`, `code-simplification`
+- Production readiness: `security-and-hardening`, `performance-optimization`, `ci-cd-and-automation`, `shipping-and-launch`
+- Maintenance: `git-workflow-and-versioning`, `deprecation-and-migration`, `documentation-and-adrs`
+
+### Maintaining Skills
+
+- Every skill lives in `skills/<name>/SKILL.md` with YAML frontmatter (`name`, `description`).
+- Keep `SKILL.md` focused on workflow and exit criteria. Put long checklists in `references/`.
+- Run `./scripts/validate-template.sh` after changing skills.
+- The root `skills/`, `agents/`, `references/` directories are the single source — never commit copies under `init/`.
+
 ## Safety Rules
 
 - Never commit `.env`, secrets, tokens, generated credentials, or private keys.

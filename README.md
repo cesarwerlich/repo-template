@@ -11,49 +11,37 @@ The `init/` directory is the payload for new projects:
 ```text
 init/
   README.md
-  CONTEXT.md
-  AGENTS.md
-  CLAUDE.md
-  ANTIGRAVITY.md
-  TESTING.md
-  EVALS.md
-  MEMORY.md
-  JOURNAL.md
-  ROADMAP.md
-  DECISIONS.md
-  SECURITY.md
-  SUPPORT.md
-  OPERATIONS.md
-  CONTRIBUTING.md
-  CODEOWNERS
-  RELEASE.md
-  .env.example
-  .gitignore
-  .editorconfig
+  CONTEXT.md       Purpose, architecture, constraints     ┐ startup
+  TASKS.md         Live handoff: active work, next action  ├ reads
+  DECISIONS.md     Accepted decisions still in force       ┘
+  AGENTS.md        Canonical agent contract
+  CLAUDE.md        Thin wrapper -> AGENTS.md
+  ANTIGRAVITY.md   Thin wrapper -> AGENTS.md
+  PLAYBOOK.md      Why each area exists and how to use it
+  SECURITY.md  SUPPORT.md  CONTRIBUTING.md  CODEOWNERS   (kept at root for GitHub)
+  .env.example  .gitignore  .editorconfig
+  CLAUDE.local.md.example   Copy → CLAUDE.local.md (gitignored) for machine-specific config
   scripts/
     bootstrap.sh
     check.sh
     new-repo.sh
   .github/
-    workflows/
-      ci.yml
-      security.yml
+    workflows/{ci.yml, security.yml}
     pull_request_template.md
     ISSUE_TEMPLATE/
   .agents/
-    skills/
-    agents/
-    references/
+    README.md         (skills/, agents/, references/ generated at create time)
   docs/
-    REFERENCE.md
-    agents/
+    roadmap.md  memory.md  journal.md
+    testing.md  evals.md  operations.md  release.md
+    adr/  history/  specs/  agents/  runbooks/  template-adoption/
 ```
 
-The root `skills/`, `agents/`, `references/`, and `docs/` folders are source material for maintaining the bundled agent subsystem. New repos receive a copy under `init/.agents/`, plus a shared `docs/agents/` home for tool-neutral personas and playbooks.
+The root `skills/`, `agents/`, and `references/` folders are the single source for the bundled agent subsystem. They are **not** committed under `init/`; instead `new-repo.sh` generates them into each new repo's `.agents/` at creation time, so there is no stored duplicate to drift. `docs/agents/` ships as a shared home for tool-neutral personas and playbooks.
 
 ## Use It
 
-From this template directory:
+### New repository
 
 ```bash
 ./init/scripts/new-repo.sh /path/to/new-project "Project Name"
@@ -68,25 +56,54 @@ Then in the new project:
 
 If the target folder already exists, `new-repo.sh` copies only missing files and leaves existing files untouched.
 
-For existing repositories where you want an adoption report and a smaller default payload:
+### Existing repository
+
+Already have a repo and want to add the template's docs, agent guidance, and scripts without touching what's there?
 
 ```bash
-./scripts/adopt-existing-repo.sh /path/to/existing-project
+# Preview what would be created — writes nothing
+./scripts/adopt-existing-repo.sh --report-only /path/to/existing-repo
+
+# Apply (additive only, never overwrites existing files)
+./scripts/adopt-existing-repo.sh /path/to/existing-repo
 ```
 
-Use `--report-only` to inspect what would be created without writing files.
+Profiles: `minimal` (default, core docs + agent files), `github` (adds CI/PR templates), `full` (everything including `.agents/`).
 
-See `docs/adopting-existing-repos.md` for profiles and conflict-safe adoption guidance.
+See `docs/adopting-existing-repos.md` for what gets created, folder guidance, and conflict-safe adoption details.
 
 ## Maintain It
 
-Run validation after edits:
+1. Read `CONTEXT.md` — template's own architecture and constraints.
+2. Edit `init/` for payload changes; edit root `skills/`, `agents/`, `references/` for the agent subsystem.
+3. When adding a required payload file, update `scripts/validate-template.sh`.
+4. Run validation before finishing:
 
 ```bash
 ./scripts/validate-template.sh
 ```
 
 Validation checks for unresolved placeholders, required payload files, malformed skill frontmatter, broken local markdown links, and ignored OS/secret files.
+
+5. Dry-run a new repo to confirm the full tree generates correctly:
+
+```bash
+./init/scripts/new-repo.sh /tmp/test-project "Test" && cd /tmp/test-project && ./scripts/check.sh
+```
+
+## Navigation
+
+| File / Folder | Purpose |
+|---|---|
+| `README.md` | Usage, design principles, full file list (you are here) |
+| `CONTEXT.md` | Template architecture, constraints, local commands |
+| `AGENTS.md` | Agent guidance, skill groups, safety rules |
+| `CONTRIBUTING.md` | Change guidelines and review checklist |
+| `PLAYBOOK.md` | Design intent for each template lane |
+| `docs/adr/` | Architectural decision records |
+| `docs/adopting-existing-repos.md` | Adoption profiles and conflict-safe guidance |
+| `init/` | The payload — what new projects receive |
+| `skills/` | Source for bundled agent skills (generated into `.agents/` at create time) |
 
 ## Design Principles
 

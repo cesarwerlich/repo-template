@@ -104,12 +104,15 @@ copy_minimal() {
     CLAUDE.md \
     ANTIGRAVITY.md \
     CONTEXT.md \
-    MEMORY.md \
-    ROADMAP.md \
-    TESTING.md \
-    EVALS.md \
+    TASKS.md \
+    DECISIONS.md \
+    PLAYBOOK.md \
     SECURITY.md \
-    OPERATIONS.md \
+    docs/memory.md \
+    docs/roadmap.md \
+    docs/testing.md \
+    docs/evals.md \
+    docs/operations.md \
     docs/agents/README.md \
     docs/adr/0001-template.md \
     docs/runbooks/README.md \
@@ -147,6 +150,30 @@ case "$profile" in
     ;;
 esac
 
+# The agent subsystem is single-sourced at the repo root and generated into
+# .agents/ for the full profile (mirroring new-repo.sh), so there is no
+# committed duplicate to drift.
+if [ "$profile" = "full" ]; then
+  agents_source_root="$(cd "$template_dir/.." && pwd)"
+  for sub in skills agents references; do
+    src="$agents_source_root/$sub"
+    dest_rel=".agents/$sub"
+    dest="$target_dir/$dest_rel"
+    if [ ! -d "$src" ]; then
+      continue
+    fi
+    if [ -e "$dest" ]; then
+      skipped+=("$dest_rel")
+      continue
+    fi
+    created+=("$dest_rel")
+    if [ "$report_only" -eq 0 ]; then
+      mkdir -p "$target_dir/.agents"
+      cp -R "$src" "$dest"
+    fi
+  done
+fi
+
 if [ "$with_evals_dir" -eq 1 ]; then
   evals_readme="$target_dir/evals/README.md"
   if [ -e "$evals_readme" ]; then
@@ -160,7 +187,7 @@ if [ "$with_evals_dir" -eq 1 ]; then
 
 Use this folder for repeatable eval datasets, run logs, fixtures, and benchmark artifacts.
 
-Keep the lightweight strategy in `../EVALS.md`; store executable or data-backed eval assets here only when the repo needs them.
+Keep the lightweight strategy in `../docs/evals.md`; store executable or data-backed eval assets here only when the repo needs them.
 EOF
     fi
   fi

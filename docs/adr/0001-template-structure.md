@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted. Amended 2026-06-13 (agent subsystem is generated, not committed; `AGENTS.md` is canonical; payload knowledge/ops docs moved under `docs/`).
 
 ## Context
 
@@ -10,17 +10,17 @@ New projects need consistent scaffolding: documentation, CI, scripts, and option
 
 ## Decision
 
-1. **`init/` is the payload, root is the source.** All files copied into new projects live under `init/`. Root-level `skills/`, `agents/`, and `references/` are the canonical source for the agent subsystem; they are copied verbatim into `init/.agents/` when maintained. This prevents drift between the template's own agents and what new projects receive.
+1. **`init/` is the payload, root is the source.** Most files copied into new projects live under `init/`. Root-level `skills/`, `agents/`, and `references/` are the single canonical source for the agent subsystem; they are **not** committed under `init/`. Instead `new-repo.sh` generates them into each new repo's `.agents/` at creation time. *(Amended: the original design committed a hand-synced copy under `init/.agents/`. That copy was byte-identical to root and drifted only by human error, so it was replaced with generation-at-create-time — one source, zero stored duplication.)*
 
 2. **Agent subsystem is optional and bundled under `.agents/`.** Skills, personas, and reference checklists ship as `.agents/` inside the payload. Projects that don't use AI coding agents can delete the directory. Projects that do can customize or extend it.
 
 3. **Shell scripts over a generator framework.** `bootstrap.sh`, `check.sh`, and `new-repo.sh` are small, POSIX-friendly Bash scripts with no dependencies. They detect the project's stack from marker files (`package.json`, `go.mod`, `pyproject.toml`, `Cargo.toml`) rather than requiring configuration. This keeps the template zero-dependency and easy to audit.
 
-4. **`CLAUDE.md` and `AGENTS.md` both exist.** `CLAUDE.md` is the primary instruction file for Claude-oriented tools. `AGENTS.md` is the general agent guidance. Both are payload files; `CLAUDE.md` delegates to `AGENTS.md` as the canonical source.
+4. **`AGENTS.md` is canonical; `CLAUDE.md` and `ANTIGRAVITY.md` are thin wrappers.** `AGENTS.md` holds the full contract (session start, multi-session coordination, safety, verification). The tool-specific files exist only so tools that look for them find their way to `AGENTS.md`; they carry no separate policy. This keeps one source and lets new agent tools join with a 3-line pointer. *(Amended: originally `CLAUDE.md` was described as the primary file, which contradicted the canonical-`AGENTS.md` model used everywhere else.)*
 
 ## Consequences
 
-- Easier: Maintaining skills and agents in one place (root) and copying to `init/.agents/` keeps the two in sync.
+- Easier: The agent subsystem has one home (root) and is generated on demand, so there is no committed copy to keep in sync.
 - Easier: New projects start with a safety baseline (SECURITY.md, OPERATIONS.md) without any tooling dependency.
 - Harder: Adding a new required payload file means updating both the `init/` tree and `scripts/validate-template.sh`.
 - Constraint: `init/` must stay stack-neutral — no project-specific names, URLs, or secrets.

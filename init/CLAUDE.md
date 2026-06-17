@@ -1,19 +1,10 @@
 # Claude Instructions
 
-Read `AGENTS.md` first. This file exists for Claude-oriented tools that prefer `CLAUDE.md`.
+This project's agent contract is **`AGENTS.md`**. Read it first and follow it.
 
-## Default Workflow
+`CLAUDE.md` exists only so Claude-oriented tools that look for it find their way
+here. It intentionally holds no separate policy — everything (session start,
+multi-session coordination, safety rules, verification) lives in `AGENTS.md`.
 
-1. Ground in `CONTEXT.md`, `ROADMAP.md`, and `MEMORY.md`.
-2. Inspect the current implementation before making claims.
-3. Use relevant `.agents/skills/` workflows when they help.
-4. Make focused changes.
-5. Run `./scripts/check.sh` when relevant.
-6. Update `MEMORY.md` for durable decisions or traps.
-
-## Boundaries
-
-- Do not overwrite user work.
-- Do not commit secrets.
-- Do not invent missing project facts; record unknowns in `ROADMAP.md` or ask.
-- If this repo is used with another tool, add a similarly thin wrapper rather than duplicating policy text.
+If you use another agent tool, add a similarly thin wrapper that points to
+`AGENTS.md` rather than duplicating its content.
