@@ -42,6 +42,7 @@ The minimal profile creates these files (never overwrites existing ones):
 | `TASKS.md` | Live handoff: current work, active sessions, next action |
 | `DECISIONS.md` | Accepted decisions still in force |
 | `AGENTS.md` | Canonical agent contract (session start, coordination, safety) |
+| `PLAYBOOK.md` | Why each area exists and how to use it — onboarding for humans and agents |
 | `CLAUDE.md` | Thin pointer → `AGENTS.md` |
 | `ANTIGRAVITY.md` | Thin pointer → `AGENTS.md` |
 | `docs/roadmap.md` | Priorities and open questions |

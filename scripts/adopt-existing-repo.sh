@@ -106,6 +106,7 @@ copy_minimal() {
     CONTEXT.md \
     TASKS.md \
     DECISIONS.md \
+    PLAYBOOK.md \
     SECURITY.md \
     docs/memory.md \
     docs/roadmap.md \

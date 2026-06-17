@@ -38,6 +38,7 @@ required_files=(
   "init/docs/template-adoption/README.md"
   "init/scripts/check.sh"
   "init/scripts/new-repo.sh"
+  "init/PLAYBOOK.md"
   "scripts/adopt-existing-repo.sh"
 )
 

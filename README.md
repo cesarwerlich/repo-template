@@ -17,6 +17,7 @@ init/
   AGENTS.md        Canonical agent contract
   CLAUDE.md        Thin wrapper -> AGENTS.md
   ANTIGRAVITY.md   Thin wrapper -> AGENTS.md
+  PLAYBOOK.md      Why each area exists and how to use it
   SECURITY.md  SUPPORT.md  CONTRIBUTING.md  CODEOWNERS   (kept at root for GitHub)
   .env.example  .gitignore  .editorconfig
   scripts/
