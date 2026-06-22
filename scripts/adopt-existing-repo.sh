@@ -114,10 +114,17 @@ copy_minimal() {
     docs/evals.md \
     docs/operations.md \
     docs/agents/README.md \
+    docs/agents/lane-protocol.md \
+    docs/agents/issue-lane-template.md \
+    docs/agents/worktree-bootstrap.md \
+    docs/agents/review-checklist.md \
     docs/adr/0001-template.md \
     docs/runbooks/README.md \
     scripts/check.sh \
-    scripts/bootstrap.sh
+    scripts/bootstrap.sh \
+    scripts/lane-update.mjs \
+    scripts/worktree-bootstrap.sh \
+    scripts/worktree-cleanup.sh
   do
     copy_missing "$item"
   done
@@ -125,6 +132,7 @@ copy_minimal() {
 
 copy_github() {
   copy_missing ".github/pull_request_template.md"
+  copy_missing ".github/ISSUE_TEMPLATE/agent_lane.md"
   copy_missing ".github/ISSUE_TEMPLATE/bug_report.md"
   copy_missing ".github/ISSUE_TEMPLATE/task.md"
   copy_missing ".github/workflows/ci.yml"

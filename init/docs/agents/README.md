@@ -5,6 +5,7 @@ This folder is for tool-neutral personas, checklists, and playbooks that any sup
 ## Suggested Contents
 
 - review playbooks
+- lane and worktree protocol docs
 - test or eval rubrics
 - onboarding notes
 - architecture prompts
@@ -15,4 +16,3 @@ This folder is for tool-neutral personas, checklists, and playbooks that any sup
 - Keep these files tool-neutral.
 - Put Claude-specific subagents in `.agents/` only if the repo actually needs them.
 - Keep any tool wrapper files thin and pointed back to `AGENTS.md`.
-
