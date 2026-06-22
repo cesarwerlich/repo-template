@@ -24,6 +24,9 @@ init/
   scripts/
     bootstrap.sh
     check.sh
+    lane-update.mjs
+    worktree-bootstrap.sh
+    worktree-cleanup.sh
     new-repo.sh
   .github/
     workflows/{ci.yml, security.yml}
@@ -38,6 +41,8 @@ init/
 ```
 
 The root `skills/`, `agents/`, and `references/` folders are the single source for the bundled agent subsystem. They are **not** committed under `init/`; instead `new-repo.sh` generates them into each new repo's `.agents/` at creation time, so there is no stored duplicate to drift. `docs/agents/` ships as a shared home for tool-neutral personas and playbooks.
+
+The default payload now also includes lane coordination scaffolding for teams that want one issue, one worktree, and one PR per agent lane.
 
 ## Use It
 

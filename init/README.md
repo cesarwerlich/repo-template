@@ -30,6 +30,7 @@ Read on demand:
 - `docs/memory.md` - durable facts, traps, and compiled Q&A.
 - `docs/journal.md` - chronological notes and discussion outcomes.
 - `docs/testing.md` / `docs/evals.md` - verification and benchmark notes.
+- `docs/agents/lane-protocol.md` - issue lanes, worktrees, and coordinator rules when multiple agents work in parallel.
 - `CLAUDE.md` and `ANTIGRAVITY.md` - thin tool wrappers that point back to `AGENTS.md`.
 
 ## Common Commands
@@ -37,6 +38,9 @@ Read on demand:
 ```bash
 ./scripts/bootstrap.sh  # install/setup what this repo needs
 ./scripts/check.sh      # run stack-aware verification
+# optional: lane/worktree helpers (requires Node.js for lane-update.mjs)
+AGENT_TOOL=claude ./scripts/worktree-bootstrap.sh <issue-n> <slug>
+node ./scripts/lane-update.mjs --help
 ```
 
 ## Repository Layout

@@ -20,7 +20,7 @@ Preview without writing:
 
 Profiles:
 
-- `minimal`: core docs, agent guidance, memory, journal, roadmap, testing, evals, security, operations, support, and basic scripts.
+- `minimal`: core docs, agent guidance, memory, journal, roadmap, testing, evals, security, operations, basic scripts, and lane/worktree coordination scaffolding.
 - `github`: minimal plus GitHub issue, PR, CI, and security workflow templates when missing.
 - `full`: every top-level item from `init/`, still no overwrites.
 
@@ -63,6 +63,7 @@ The `full` profile also generates `.agents/` (skills, personas, references) from
 - `AGENTS.md`: canonical shared instructions for Codex, Claude, Antigravity, Copilot, and other coding agents.
 - `CLAUDE.md`, `ANTIGRAVITY.md`: thin compatibility wrappers that point back to `AGENTS.md`.
 - `docs/agents/`: tool-neutral playbooks, rubrics, and personas.
+- `docs/agents/lane-protocol.md`: recommended when the repo will use multiple agents or worktrees in parallel.
 - `.agents/`: optional bundled skills, specialist personas, and references — generated, not committed.
 - `.claude/`: create only when the target repo needs Claude-native agents, commands, settings, or skills.
 - `docs/`: recommended for durable project documentation.
