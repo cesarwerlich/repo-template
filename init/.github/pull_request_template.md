@@ -12,12 +12,15 @@
 - [ ] documented any necessary scope expansion
 - [ ] kept unrelated files out of the PR
 
-## Testing
+## Verification
 
-- [ ] included exact commands actually run in the PR description
+- [ ] Ran:
+  - ``
+
+## Blockers / Follow-ups
+
+- None.
 
 ## Risk
 
 ## Rollback Plan
-
-## Notes

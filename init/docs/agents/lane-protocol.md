@@ -24,13 +24,14 @@ Use this workflow whenever an agent picks up a scoped implementation lane.
 - Use stacked PRs only when one lane truly depends on another.
 - List expected files in the pickup update so overlap is obvious early.
 - Include exact verification commands in the final handoff.
+- Use the agent tool name as the branch prefix so parallel work is clearly attributable. Examples: `claude/issue-17-slug`, `codex/issue-17-slug`, `copilot/issue-17-slug`, `gemini/issue-17-slug`. Each agent uses its own convention — the prefix identifies who owns the lane.
 
 ## Lane update helper
 
 Preview a pickup comment:
 
 ```bash
-npm run lane:update -- pickup \
+node ./scripts/lane-update.mjs pickup \
   --issue 17 \
   --branch codex/issue-17-lane-protocol \
   --worktree .worktrees/17-lane-protocol \
@@ -43,7 +44,7 @@ npm run lane:update -- pickup \
 Preview a final lane update:
 
 ```bash
-npm run lane:update -- final \
+node ./scripts/lane-update.mjs final \
   --issue 17 \
   --branch codex/issue-17-lane-protocol \
   --worktree .worktrees/17-lane-protocol \
@@ -51,3 +52,23 @@ npm run lane:update -- final \
   --verify "./scripts/check.sh" \
   --pr 23
 ```
+
+Post directly to GitHub (requires `gh` CLI):
+
+```bash
+node ./scripts/lane-update.mjs final \
+  --issue 17 \
+  --branch codex/issue-17-lane-protocol \
+  --worktree .worktrees/17-lane-protocol \
+  --change "Added the lane protocol docs and worktree helper scripts" \
+  --verify "./scripts/check.sh" \
+  --pr 23 \
+  --post
+```
+
+Notes:
+
+- Without `--post`, the script prints the comment for review only.
+- With `--post`, the script uses the authenticated `gh` CLI and infers the repo from `origin`.
+- Pass `--repo owner/name` if the repo cannot be inferred correctly.
+- If your project has a `package.json`, add a script: `"lane:update": "node scripts/lane-update.mjs"` and then use `npm run lane:update -- pickup ...` for shorter invocation.

@@ -26,5 +26,5 @@ One paragraph describing the lane outcome and why it matters now.
 
 ## Suggested branch and worktree
 
-- branch: `codex/issue-<n>-<slug>`
+- branch: `<agent-tool>/issue-<n>-<slug>` (e.g., `codex/issue-17-lane-protocol`, `claude/issue-17-lane-protocol`)
 - worktree: `.worktrees/<n>-<slug>`

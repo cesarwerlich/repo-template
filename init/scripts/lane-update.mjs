@@ -160,7 +160,13 @@ function printHelp() {
 Usage:
   node scripts/lane-update.mjs pickup --issue 17 --branch codex/issue-17-lane-protocol --worktree .worktrees/17-lane-protocol --scope "..." [--scope "..."] [--expected-file "path"] [--blocker "..."] [--post] [--repo owner/name]
   node scripts/lane-update.mjs final --issue 17 --branch codex/issue-17-lane-protocol --worktree .worktrees/17-lane-protocol --change "..." [--change "..."] [--verify "..."] [--pr 20] [--blocker "..."] [--follow-up "..."] [--post] [--repo owner/name]
+
+Behavior:
+  - prints the generated issue comment to stdout by default
+  - with --post, submits the comment using "gh issue comment"
+  - infers the repository from git origin unless --repo is provided
 `);
+
 }
 
 function postIssueComment({ repo, issue, body }) {

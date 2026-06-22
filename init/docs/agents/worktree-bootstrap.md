@@ -21,6 +21,7 @@ AGENT_TOOL=codex   ./scripts/worktree-bootstrap.sh 17 lane-protocol
 AGENT_TOOL=copilot ./scripts/worktree-bootstrap.sh 17 lane-protocol
 ```
 
+
 ## Recommended bootstrap flow
 
 ```bash
